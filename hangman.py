@@ -11,17 +11,16 @@ lives = [7]
 blank = '*'
 won = [False]
 
-
-
 for i in word_to_guess:
     blank_word.append(blank)
 print(''.join(blank_word))
 
-
+# Check if all the letters have been guessed
 def letters_left_to_guess():
     if blank not in blank_word:
         won[0] = True
 
+# Remove a life with a wrong guess
 def remove_life():
     lives[0] -= 1
     print('That letter is not in the word\nYou now have ' + str(lives[0]) + ' remaining!')
@@ -35,6 +34,7 @@ def letter_used_before(letter):
                 return True
     return False
 
+# Check if the guessed letter matches
 def check_letter(letter):
     count = 0
     num_letters = 0
@@ -48,7 +48,8 @@ def check_letter(letter):
         remove_life()
     print('letters you have guessed: ', guessed_letters)
     print(''.join(blank_word))
-    
+
+# while loop to run the game.
 while True:
     line = input('Please enter your next guess:')
     if line == 'quit':
