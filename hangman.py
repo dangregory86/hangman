@@ -1,18 +1,21 @@
 import random
 
-words = ['banana', 'fruit', 'car']
+file = open('word_list.txt', 'r')
+content = file.read()
+file.close()
+words = content.split()
 blank_word = []
 guessed_letters = []
-word_to_guess = words[random.randint(0, 2)]
-lives = [9]
-blank = ' - '
+word_to_guess = words[random.randint(0, len(words) - 1)]
+lives = [7]
+blank = '*'
 won = [False]
 
-# TODO make it into a single function that starts and runs a full game.
+
 
 for i in word_to_guess:
     blank_word.append(blank)
-print(blank_word)
+print(''.join(blank_word))
 
 
 def letters_left_to_guess():
@@ -44,22 +47,17 @@ def check_letter(letter):
     if num_letters == 0:
         remove_life()
     print('letters you have guessed: ', guessed_letters)
-    print(blank_word)
+    print(''.join(blank_word))
     
-
-moves = 0
 while True:
-    line = input('Enter a letter to guess: ')
+    line = input('Please enter your next guess:')
     if line == 'quit':
         break
     check_letter(line)
     letters_left_to_guess()
-    moves += 1
     if won[0]:
-        print('you won!! in ' + str(moves) + ' moves!')
+        print('congratulations you win')
         break
     if lives[0] < 1:
-        print('Game over loser!!')
+        print('you lose')
         break
-    
-print('done')
